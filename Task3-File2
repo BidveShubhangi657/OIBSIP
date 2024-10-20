@@ -1,0 +1,39 @@
+// JavaScript for Temperature Conversion
+
+document.getElementById('convertBtn').addEventListener('click', function() {
+    
+    let tempInput = document.getElementById('temperatureInput').value;
+    let convertFrom = document.getElementById('conversionType').value;
+    let convertTo = document.getElementById('convertTo').value;
+    let resultDisplay = document.getElementById('result');
+
+    // Check if input is a valid number
+    if (isNaN(tempInput) || tempInput === "") {
+        resultDisplay.innerHTML = "Please enter a valid number!";
+        return;
+    }
+
+    // Parse the input temperature
+    let temperature = parseFloat(tempInput);
+    let convertedTemp;
+
+    
+    if (convertFrom === convertTo) {
+        convertedTemp = temperature;
+    } else if (convertFrom === "Celsius" && convertTo === "Fahrenheit") {
+        convertedTemp = (temperature * 9/5) + 32;
+    } else if (convertFrom === "Celsius" && convertTo === "Kelvin") {
+        convertedTemp = temperature + 273.15;
+    } else if (convertFrom === "Fahrenheit" && convertTo === "Celsius") {
+        convertedTemp = (temperature - 32) * 5/9;
+    } else if (convertFrom === "Fahrenheit" && convertTo === "Kelvin") {
+        convertedTemp = ((temperature - 32) * 5/9) + 273.15;
+    } else if (convertFrom === "Kelvin" && convertTo === "Celsius") {
+        convertedTemp = temperature - 273.15;
+    } else if (convertFrom === "Kelvin" && convertTo === "Fahrenheit") {
+        convertedTemp = ((temperature - 273.15) * 9/5) + 32;
+    }
+
+    
+    resultDisplay.innerHTML = `Converted Temperature: ${convertedTemp.toFixed(2)} ${convertTo}`;
+});
